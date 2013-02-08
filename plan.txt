@@ -1,0 +1,11 @@
+Sound Design
+- Play a sound
+- Play 2 sounds
+- Play a sound on command
+- Play multiple sounds on command
+- Formats across browsers .mp3 (Firefox, IE, Safari) and .ogg (Chrome, Firefox, Opera)
+
+Visual Design
+- MPC Buttons
+- Transport
+- Time indicator
