@@ -1,14 +1,32 @@
 // JavaScript Document
 var padArray = [1,2,3,4,5,6,7,8,9,10];
 var keyArray = [1,2,3,4,5,6,7,8,9,10];
+var dropsArraySeconds = 
+[
+0, //welcome
+11.637,	//welcomefast
+18.982,	//nowyoutry
+20.922,	//fresh
+22.817,	//wack
+24.061,	//watchforthedrop
+25.356,	//tryagain
+26.585,	//ready set go
+28.952,	//dope
+30.578	// now you try fast
+];
+
 var padTimer;
 var playTimer;
+var dropTimer;
 var numberOfSlices = 8;
 var sliceTime;
+var steps=0;
 $(document).ready(
 	function(){
 		fisherYates(padArray);
 		makeKeyArray(padArray,keyArray);
+		$('audio #beat_1').oncanplaythrough = welcome();
+		
 		$('.pad-1').click(function(){stopLoop(); padPress(0);});	
 		$('.pad-2').click(function(){stopLoop(); padPress(1);});	
 		$('.pad-3').click(function(){stopLoop(); padPress(2);});			
@@ -199,6 +217,7 @@ function stopLoop(){
 	$('.pad').removeClass("active");
 	$('audio')[0].pause();
 	$('audio')[0].currentTime=0;
+	$('#drops')[0].pause;
 }
 /* Good Ole fisherYates Shuffle */
 function fisherYates ( myArray ) {
@@ -218,6 +237,117 @@ function makeKeyArray(src, dest){
 	{
 			dest[i-1] = src.indexOf(i);
 	}
+}
+
+/* 
+Title: Welcome
+Purpose: load beat and play welcome sound
+*/
+function welcome(){
+	//display welcome text
+
+	
+	//welcome to the ff-5000
+	$('#main-display p').html('Welcome to the FF-5000');
+		
+	//sonic memory exercise module (2. s)
+	dropTimer1 = setInterval(function(){
+		$('#main-display p').html('sonic memory exercise module');	
+		clearInterval(dropTimer1);
+	},3000);
+		
+
+	//are you ready to turn up (5 s)
+	dropTimer2 = setInterval(function(){
+$('#main-display p').html('are you ready to turn up?');	
+		clearInterval(dropTimer2);
+},6000);
+
+
+
+	//let's go (7.5s)
+dropTimer3 = setInterval(function(){
+$('#main-display p').html("let's go.");	
+		clearInterval(dropTimer3);
+},8100);
+
+//
+dropTimer4 = setInterval(function(){
+$('#main-display p').html("now watch for the drop.");	
+		clearInterval(dropTimer4);
+},9800);
+
+
+dropTimer = setInterval(function(){
+		if(dropStop(11.4))
+		{
+			clearInterval(dropTimer);	
+			playLoop();
+		}
+				//clearInterval(dropTimer5);
+		},10);
+
+	
+	//play welcome function
+	$('audio#drops')[0].pause();
+	$('#drops')[0].play();
+	
+	//playLoop();
+}
+
+
+function dropStop(timeToStop, debug){
+	if(typeof debug == 'undefined') {
+        debug = false;
+    }
+		if(debug){
+			$('#sub-display-left p').html($('audio#drops')[0].currentTime + "/" + timeToStop);
+		}
+		
+	if ($('audio#drops')[0].currentTime >= timeToStop) {
+      	$('audio#drops')[0].pause();
+		if(debug){
+			$('#sub-display-left p').html($('audio#drops')[0].currentTime + "/" + timeToStop);
+		}
+		clearInterval(dropTimer);
+		return true;
+	}
+	return false;
+}
+/* 
+Title: beatPlay
+Purpose: demonstrates the beat through steps number of samples
+*/
+function beatPlay(steps){
+	
+}
+
+
+function nowYouTry(){
+		
+}
+/* 
+Title: tryAgain
+Purpose:
+*/
+function tryAgain(){
+	
+}
+
+/* 
+Title: success
+Purpose:
+*/
+function success(){
+	
+}
+
+/* 
+Title:
+Purpose:
+*/
+function mistake(){
+	
 }
 /*
 var dogBarkingBuffer = null;
