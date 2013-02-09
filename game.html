@@ -372,6 +372,38 @@ background: #888;
 left: 323px;
 top: 4px;	
 }
+
+#debug-buttons{
+	position: absolute;
+left: 0;
+top: 25%;
+list-style: none;
+text-align: center;
+}
+
+	#debug-buttons li a{
+		text-decoration: none;
+border-radius: 1px;
+background-color: rgb(82, 168, 235);
+padding: 5px 15px;
+margin: 10px 0px;
+display: block;
+color: whitesmoke;
+text-shadow: 1px 0px 0px #aaa;
+font-weight: bold;
+border: 2px solid #fff;
+box-shadow: -1px 1px 1px 1px rgb(162, 160, 160);
+font-family: Arial;
+	}
+	
+	#debug-info{
+				position: absolute;
+right: 0;
+top: 25%;
+list-style: none;
+padding-right:10px;
+	}
+	
 </style>
 </head>
 
@@ -448,6 +480,23 @@ top: 4px;
   	<div id="slider"></div>
   </div>
 </div>
+<div>
+<ul id="debug-buttons">
+<li><a href="#" onClick="welcome()">Welcome</a></li>
+<li><a href="#" onClick="success()">Dope</a></li>
+<li><a href="#" onClick="mistake()">Wack</a></li>
+<li><a href="#" onClick="nowYouTry()">Now You Try</a></li>
+<li><a href="#" onClick="tryAgain()">Try Again</a></li>
+</ul>
+<ul id="debug-info">
+	<li id="current-pad">Current Pad</li>
+	<li id="previous-pad">Previous Pad</li>
+	<li id="next-pad">Next Pad</li>
+    <li id="highest-pad">Highest Pad</li>
+</ul>
+</div>
+
+
 <footer class="fixed-navbar-bottom">
 <div class="inner-navbar">
 <p>
