@@ -1,14 +1,51 @@
 // JavaScript Document
 var padArray = [1,2,3,4,5,6,7,8,9,10];
 var keyArray = [1,2,3,4,5,6,7,8,9,10];
+var currentPad =0;
+var previousPad =0;
+var nextPad =1;
+var highestPad = 0;
+var dropTimer, dropTimer1, dropTimer2, dropTimer3, dropTimer4;
+var dropsArraySeconds = 
+[
+0,		//[0] welcome 
+11.637,	//[1] welcomefast
+18.982,	//[2] nowyoutry
+20.922,	//[3] fresh
+22.817,	//[4] wack
+24.061,	//[5] watchforthedrop
+25.356,	//[6] tryagain
+26.585,	//[7] ready set go
+28.952,	//[8] dope
+30.578	//[9] now you try fast
+];
+
+var dropsDurations = [
+11.637,
+7.345,
+1.94,
+1.895,
+1.244,
+1.295,
+1.229,
+2.367,
+1.626,
+1.94
+];
+
 var padTimer;
 var playTimer;
+var dropTimer;
 var numberOfSlices = 8;
 var sliceTime;
+var steps=0;
 $(document).ready(
 	function(){
 		fisherYates(padArray);
 		makeKeyArray(padArray,keyArray);
+		
+		//$('audio #beat_1').oncanplaythrough = welcome();
+		
 		$('.pad-1').click(function(){stopLoop(); padPress(0);});	
 		$('.pad-2').click(function(){stopLoop(); padPress(1);});	
 		$('.pad-3').click(function(){stopLoop(); padPress(2);});			
@@ -133,12 +170,39 @@ $(document).ready(
 		
 	});
 
-function padPress(number){
+function padPress(number,manual){
+	if(typeof manual == 'undefined') {
+        manual = true;
+    }
+	
+
 	$('.pad').removeClass("active");	
 	$('.pad-'+(number+1)).addClass("active");
 	$('#play').addClass("active");
 	$('#stop').removeClass("active");
 	$('#sub-display-left p').text(padArray[number]);
+	
+	if(manual){
+		//update current pad
+		currentPad = padArray[number];
+		$('#current-pad').text('Current Pad:' + currentPad);
+		
+		//check if current pad is the correct one
+		if (currentPad === nextPad)
+		{
+			success();	
+		}
+		else if (currentPad === 1)
+		{
+			nextPad = currentPad % numberOfSlices + 1;
+			$('#next-pad').text('Next Pad: '+	nextPad);
+		} 
+		else{
+			mistake();
+		}
+
+		
+	}
 
 // jump current time to corresponding slice
 // the padArray stores the slice number
@@ -165,6 +229,9 @@ function sliceDuration(numOfSlices){
 }
 
 function padRelease(number){
+		
+	
+	
 	$('.pad-'+number).removeClass("active");
 	$('#play').removeClass("active");
 	$('#stop').addClass("active");
@@ -179,15 +246,16 @@ function playLoop(){
 	$('audio')[0].pause(); 
 	$('audio')[0].currentTime=0; */
 	sliceTime = sliceDuration(numberOfSlices)*1000;
-	padPress(keyArray[0]);
+	$('#main-display p').text('play the pattern');
+	padPress(keyArray[0],false);
 	var i=2;	
 	playTimer = setInterval(function(){
 
 			if(i<9 ){
-				padPress(keyArray[i-1]);
+				padPress(keyArray[i-1], false);
 				i++;	
 			}
-			else{stopLoop();}
+			else{stopLoop(); clearInterval(playTimer);}
 	}, sliceTime);
 	
 }
@@ -199,6 +267,7 @@ function stopLoop(){
 	$('.pad').removeClass("active");
 	$('audio')[0].pause();
 	$('audio')[0].currentTime=0;
+	$('#drops')[0].pause;
 }
 /* Good Ole fisherYates Shuffle */
 function fisherYates ( myArray ) {
@@ -218,6 +287,169 @@ function makeKeyArray(src, dest){
 	{
 			dest[i-1] = src.indexOf(i);
 	}
+}
+
+/* 
+Title: Welcome
+Purpose: load beat and play welcome sound
+*/
+function welcome(){
+	//display welcome text
+
+	
+	//welcome to the ff-5000
+	$('#main-display p').text('Welcome to the FF-5000');
+
+		
+	//sonic memory exercise module (2. s)
+	dropTimer1 = setInterval(function(){
+		$('#main-display p').text('sonic memory exercise module');	
+		clearInterval(dropTimer1);
+	},3000);
+		
+
+	//are you ready to turn up (5 s)
+	dropTimer2 = setInterval(function(){
+$('#main-display p').text('are you ready to turn up?');	
+		clearInterval(dropTimer2);
+},6000);
+
+
+
+	//let's go (7.5s)
+dropTimer3 = setInterval(function(){
+$('#main-display p').text("let's go.");	
+		clearInterval(dropTimer3);
+},8100);
+
+//
+dropTimer4 = setInterval(function(){
+$('#main-display p').text("now watch for the drop.");	
+		clearInterval(dropTimer4);
+},9800);
+
+
+dropTimer = setInterval(function(){
+		if(dropStop(11.4))
+		{
+			clearInterval(dropTimer);	
+			playLoop();
+		}
+				//clearInterval(dropTimer5);
+		},10);
+
+	
+	//play welcome function
+	$('audio#drops')[0].pause();
+	if ($('audio#drops')[0].currentTime!==0)
+	{$('audio#drops')[0].currentTime=0;	stopLoop();}
+	$('#drops')[0].play();
+	
+	//playLoop();
+}
+
+
+function dropStop(timeToStop, debug){
+	if(typeof debug == 'undefined') {
+        debug = false;
+    }
+		if(debug){
+			$('#sub-display-left p').text($('audio#drops')[0].currentTime + "/" + timeToStop);
+		}
+		
+	if ($('audio#drops')[0].currentTime >= timeToStop) {
+      	$('audio#drops')[0].pause();
+		if(debug){
+			$('#sub-display-left p').text($('audio#drops')[0].currentTime + "/" + timeToStop);
+		}
+		clearInterval(dropTimer);
+		return true;
+	}
+	return false;
+}
+/* 
+Title: beatPlay
+Purpose: demonstrates the beat through steps number of samples
+*/
+function beatPlay(steps){
+	
+}
+
+function clearDropTimers(){
+		clearInterval(dropTimer1);
+		clearInterval(dropTimer2);
+		clearInterval(dropTimer3);
+		clearInterval(dropTimer4);
+		clearInterval(dropTimer);	
+}
+
+function nowYouTry(){
+
+		clearDropTimers();
+		
+		$('audio#drops')[0].pause();
+		$('audio#drops')[0].currentTime = dropsArraySeconds[2];
+		$('audio#drops')[0].play();
+		
+		dropTimer = setInterval(function(){
+		if(dropStop(dropsArraySeconds[3]-0.2))
+		{
+			clearInterval(dropTimer);	
+		}
+				//clearInterval(dropTimer5);
+		},10);
+}
+/* 
+Title: tryAgain
+Purpose:
+*/
+function tryAgain(){
+	playDrop(6);
+		
+}
+
+/* 
+Title: success
+Purpose:
+*/
+function success(){
+	playDrop(8);
+	$('#main-display p').text('good job!');
+	//update previousPad
+	previousPad = currentPad;	
+	$('#previous-pad').text('Previous Pad: '+previousPad);
+
+	//update nextPad
+	highestPad = nextPad = currentPad % numberOfSlices + 1;
+	$('#next-pad').text('Next Pad: '+	nextPad);
+	$('#highest-pad').text('Highest Pad: '+highestPad);
+}
+
+/* 
+Title:
+Purpose:
+*/
+function mistake(){
+		playDrop(4);
+		nextPad = 1;
+		previousPad = 0;
+		$('#main-display p').text('start over...');
+}
+
+function playDrop(number){
+				clearDropTimers();
+		
+		$('audio#drops')[0].pause();
+		$('audio#drops')[0].currentTime = dropsArraySeconds[number];
+		$('audio#drops')[0].play();
+		
+		dropTimer = setInterval(function(){
+		if(dropStop(dropsArraySeconds[number+1]-0.25))
+		{
+			clearInterval(dropTimer);	
+		}
+				//clearInterval(dropTimer5);
+		},10);	
 }
 /*
 var dogBarkingBuffer = null;
