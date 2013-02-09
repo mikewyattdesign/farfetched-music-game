@@ -192,7 +192,12 @@ function padPress(number,manual){
 		{
 			success();	
 		}
-		else if (currentPad !== 1){
+		else if (currentPad === 1)
+		{
+			nextPad = currentPad % numberOfSlices + 1;
+			$('#next-pad').text('Next Pad: '+	nextPad);
+		} 
+		else{
 			mistake();
 		}
 
@@ -241,6 +246,7 @@ function playLoop(){
 	$('audio')[0].pause(); 
 	$('audio')[0].currentTime=0; */
 	sliceTime = sliceDuration(numberOfSlices)*1000;
+	$('#main-display p').text('play the pattern');
 	padPress(keyArray[0],false);
 	var i=2;	
 	playTimer = setInterval(function(){
@@ -408,7 +414,7 @@ Purpose:
 */
 function success(){
 	playDrop(8);
-				
+	$('#main-display p').text('good job!');
 	//update previousPad
 	previousPad = currentPad;	
 	$('#previous-pad').text('Previous Pad: '+previousPad);
@@ -427,6 +433,7 @@ function mistake(){
 		playDrop(4);
 		nextPad = 1;
 		previousPad = 0;
+		$('#main-display p').text('start over...');
 }
 
 function playDrop(number){
