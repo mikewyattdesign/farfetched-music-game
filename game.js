@@ -1,4 +1,14 @@
 // JavaScript Document
+var songArray = ["Run1",
+"cradleoflifeLooseScrewzChop1",
+"cradleoflifeLooseScrewzChop2",
+"GooeyButterFrancoChop1",
+"GooeyButterFrancoChop2",
+"GooeyButterFrancoChop3",
+"RefinedJayLotusChop1",
+"RefinedJayLotusChop2",
+"RefinedJayLotusChop3",
+"RefinedJayLotusChop4"];
 var padArray = [1,2,3,4,5,6,7,8,9,10];
 var keyArray = [1,2,3,4,5,6,7,8,9,10];
 var currentPad =0;
