@@ -1,6 +1,5 @@
 // JavaScript Document
 var songArray = ["cradleoflifeLooseScrewzChop1","Run1",
-
 "cradleoflifeLooseScrewzChop2",
 "GooeyButterFrancoChop1",
 "GooeyButterFrancoChop2",
@@ -49,12 +48,14 @@ var dropTimer;
 var numberOfSlices = 8;
 var sliceTime;
 var steps=0;
+var current_song;
 $(document).ready(
 	function(){
-		fisherYates(padArray);
-		makeKeyArray(padArray,keyArray);
+		current_song = 0;
+		initializeSong(current_song);
 		createAudioList(songArray);
 		
+		$('#current-song').text("Song: "+songArray[current_song]);
 		//$('audio #beat_1').oncanplaythrough = welcome();
 		
 		$('.pad-1').click(function(){stopLoop(); padPress(0);});	
@@ -71,8 +72,10 @@ $(document).ready(
 		$('#play').click(function(){
 			playLoop();});
 		$('#stop').click(function(){stopLoop();});
-		$('#pause').click(function(){$('audio')[0].pause(); });
+		$('#pause').click(function(){$('audio')[current_song].pause(); });
 							
+		$('#rewind').click(function(){previousSong(current_song);});
+		$('#forward').click(function(){nextSong(current_song);});
 							
 		$('#knob-0').click(function(){$('.machine').css('background-image',"url(beatmachine_0.png)");})
 		$('#knob-1').click(function(){$('.machine').css('background-image',"url(beatmachine_1.png)");})
@@ -217,15 +220,15 @@ function padPress(number,manual){
 
 // jump current time to corresponding slice
 // the padArray stores the slice number
-	$('audio')[0].currentTime=audioSlice(padArray[number],8);	
+	$('audio')[current_song].currentTime=audioSlice(padArray[number],8);	
 
 	
-	$('audio')[0].play();
+	$('audio')[current_song].play();
 	nextTime = audioSlice(padArray[number],8)+sliceDuration(8);
 
 	timer = setInterval(function () {
-    if ($('audio')[0].currentTime >= nextTime) {
-      $('audio')[0].pause();
+    if ($('audio')[current_song].currentTime >= nextTime) {
+      $('audio')[current_song].pause();
 	  padRelease(number+1);
       clearInterval(timer);
     } }, 10);
@@ -236,7 +239,7 @@ function audioSlice(sliceNumber,numOfSlices){
 }
 
 function sliceDuration(numOfSlices){
-	return 	$('audio')[0].duration/numOfSlices;
+	return 	$('audio')[current_song].duration/numOfSlices;
 }
 
 function padRelease(number){
@@ -276,8 +279,8 @@ function stopLoop(){
 	$('#stop').addClass("active");		
 	$('#play').removeClass("active");
 	$('.pad').removeClass("active");
-	$('audio')[0].pause();
-	$('audio')[0].currentTime=0;
+	$('audio')[current_song].pause();
+	$('audio')[current_song].currentTime=0;
 	$('#drops')[0].pause;
 }
 /* Good Ole fisherYates Shuffle */
@@ -475,6 +478,25 @@ function createAudioList(songs){
 	for (song in songs)	{
 		createAudioElement(songs[id],id++);
 	}
+}
+
+function initializeSong(id){
+		fisherYates(padArray);
+		makeKeyArray(padArray,keyArray);
+}
+
+function nextSong(id){
+	current_song = (id+1) % songArray.length;
+	initializeSong(current_song);
+	$('#current-song').text("Song: "+songArray[current_song]);
+}
+
+function previousSong(id){
+	if(id>0)
+	{	current_song = (id-1) % songArray.length;}
+	else{current_song = songArray.length - 1;}
+	initializeSong(current_song);
+	$('#current-song').text("Song: "+songArray[current_song]);
 }
 
 /*
