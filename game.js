@@ -1,6 +1,6 @@
 // JavaScript Document
-var songArray = ["Run1",
-"cradleoflifeLooseScrewzChop1",
+var songArray = ["cradleoflifeLooseScrewzChop1","Run1",
+
 "cradleoflifeLooseScrewzChop2",
 "GooeyButterFrancoChop1",
 "GooeyButterFrancoChop2",
@@ -53,6 +53,7 @@ $(document).ready(
 	function(){
 		fisherYates(padArray);
 		makeKeyArray(padArray,keyArray);
+		createAudioList(songArray);
 		
 		//$('audio #beat_1').oncanplaythrough = welcome();
 		
@@ -461,6 +462,21 @@ function playDrop(number){
 				//clearInterval(dropTimer5);
 		},10);	
 }
+
+/*used to create audio element for a song*/
+function createAudioElement(song,id){
+	$song = $('<audio id="beat_'+id+'" preload="auto"><source src="'+song+'.ogg" type="audio/ogg"><source src="'+song+'.mp3" type="audio/mpeg"></audio>');
+	$('#beats').append($song);
+}
+
+/*used to create audio elements for an array of songs*/
+function createAudioList(songs){
+	id = 0;
+	for (song in songs)	{
+		createAudioElement(songs[id],id++);
+	}
+}
+
 /*
 var dogBarkingBuffer = null;
 var context = new webkitAudioContext();
