@@ -49,8 +49,10 @@ var numberOfSlices = 8;
 var sliceTime;
 var steps=0;
 var current_song;
+var DEBUG_FLAG;
 $(document).ready(
 	function(){
+		DEBUG_FLAG = false;
 		current_song = 0;
 		initializeSong(current_song);
 		createAudioList(songArray);
@@ -76,6 +78,7 @@ $(document).ready(
 							
 		$('#rewind').click(function(){previousSong(current_song);});
 		$('#forward').click(function(){nextSong(current_song);});
+		$('#record').click(function(){debug_mode();});
 							
 		$('#knob-0').click(function(){$('.machine').css('background-image',"url(beatmachine_0.png)");})
 		$('#knob-1').click(function(){$('.machine').css('background-image',"url(beatmachine_1.png)");})
@@ -506,6 +509,22 @@ function previousSong(id){
 	$('#current-song').text("Song: "+songArray[current_song]);
 }
 
+
+function debug_mode(){
+	//toggle debug class visibility
+	if (DEBUG_FLAG)
+	{
+		$('.debug').css('visibility','hidden');
+		$('#record').removeClass('active');
+		DEBUG_FLAG = false;
+	}
+	else
+	{
+		$('.debug').css('visibility','visible');
+		$('#record').addClass('active');
+		DEBUG_FLAG = true;
+	}
+}
 /*
 var dogBarkingBuffer = null;
 var context = new webkitAudioContext();
