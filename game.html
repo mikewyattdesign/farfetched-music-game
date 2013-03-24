@@ -404,7 +404,8 @@ list-style: none;
 padding-right:10px;
 text-align:right;,
 	}
-	
+
+.debug{visibility:hidden;}
 </style>
 </head>
 
@@ -415,7 +416,7 @@ text-align:right;,
   		<source src="Run1.mp3" type="audio/mpeg">
 	</audio>-->
 </div>
-<audio controls id="drops" preload="auto" style="width:50%; position:relative; left:25%;">
+<audio controls class="debug" id="drops" preload="auto" style="width:50%; position:relative; left:25%;">
 	<source src="drops.ogg" type="audio/ogg">
   	<source src="drops.mp3" type="audio/mpeg">
 </audio>
@@ -485,14 +486,14 @@ text-align:right;,
   </div>
 </div>
 <div>
-<ul id="debug-buttons">
+<ul class="debug" id="debug-buttons">
 <li><a href="#" onClick="welcome()">Welcome</a></li>
 <li><a href="#" onClick="success()">Dope</a></li>
 <li><a href="#" onClick="mistake()">Wack</a></li>
 <li><a href="#" onClick="nowYouTry()">Now You Try</a></li>
 <li><a href="#" onClick="tryAgain()">Try Again</a></li>
 </ul>
-<ul id="debug-info">
+<ul class="debug" id="debug-info">
 	<li id="current-pad">Current Pad</li>
 	<li id="previous-pad">Previous Pad</li>
 	<li id="next-pad">Next Pad</li>
