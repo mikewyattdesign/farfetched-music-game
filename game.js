@@ -427,8 +427,15 @@ Title: success
 Purpose:
 */
 function success(){
-	playDrop(8);
-	$('#main-display p').text('good job!');
+	if(nextPad == numberOfSlices)	//beat victory
+	{
+		playDrop(8);
+		$('#main-display p').text('Beat Complete!');
+	}
+	else
+	{
+		$('#main-display p').text('good job! keep going!');
+	}
 	//update previousPad
 	previousPad = currentPad;	
 	$('#previous-pad').text('Previous Pad: '+previousPad);
