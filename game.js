@@ -50,13 +50,15 @@ var sliceTime;
 var steps=0;
 var current_song;
 var DEBUG_FLAG;
+var WELCOME_FLAG;
 $(document).ready(
 	function(){
 		DEBUG_FLAG = false;
+		WELCOME_FLAG = false;
 		current_song = 0;
 		initializeSong(current_song);
 		createAudioList(songArray);
-		
+		if(!WELCOME_FLAG){welcome();}
 		$('#current-song').text("Song: "+songArray[current_song]);
 		//$('audio #beat_1').oncanplaythrough = welcome();
 		
@@ -312,7 +314,7 @@ Purpose: load beat and play welcome sound
 */
 function welcome(){
 	//display welcome text
-
+	WELCOME_FLAG = true;
 	
 	//welcome to the ff-5000
 	$('#main-display p').text('Welcome to the FF-5000');
@@ -350,6 +352,7 @@ dropTimer = setInterval(function(){
 		if(dropStop(11.4))
 		{
 			clearInterval(dropTimer);	
+			stopLoop();
 			playLoop();
 		}
 				//clearInterval(dropTimer5);
