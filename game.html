@@ -518,48 +518,36 @@ a game by <a href="http://soundcloud.com/LooseScrewz" target="_blank">LooseScrew
 <script>
 $(function(){	
 	//(#rewind) Rewind: goes to previous track
-	//$('#rewind').tooltip();	//add tooltip
-	$('#rewind').attr('title','Rewind');	//add title
-	$('#rewind').attr('data-content','Goes to Previous Track');	//add data-content
-	$('#rewind').attr('data-toggle','popover');	//add data-toggle
-	$('#rewind').popover(); //add popover
+	$('#rewind').attr('title','Rewind to Previous Track');	//add title
+	$('#rewind').tooltip();	//add tooltip
 	
 	//Pause: doesn't really do anything at the moment
 	
 	//(#play) Play: demonstrates the correct pattern
-	//$('#play').tooltip();	//add tooltip
-	$('#play').attr('title','Play');	//add title
-	$('#play').attr('data-content','Plays Through Song');	//add data-content
-	//$('#play').attr('data-toggle','popover');	//add data-toggle
-	$('#play').popover(); //add popover
+	$('#play').attr('title','Play Through Song');	//add data-content
+	$('#play').tooltip();	//add tooltip
 
 
 	//(#stop) Stop: stops the demonstration
-	//$('#stop').tooltip();	//add tooltip
-	$('#stop').attr('title','Stop');	//add title
-	$('#stop').attr('data-content','Stops Playback');	//add data-content
-	//$('#stop').attr('data-toggle','popover');	//add data-toggle
-	$('#stop').popover(); //add popover
+	$('#stop').attr('title','Stop Playback');	//add title	
+	$('#stop').tooltip();	//add tooltip
 		
 	//(#forward) Forward: goes to the next track
-	//$('#forward').tooltip();	//add tooltip
-	$('#forward').attr('title','Forward');	//add title
-	$('#forward').attr('data-content','Goes to Next Track');	//add data-content
-	//$('#forward').attr('data-toggle','popover');	//add data-toggle
-	$('#forward').popover(); //add popover
+	$('#forward').attr('title','Forward to Next Track');	//add title
+	$('#forward').tooltip();	//add tooltip
 			
 	//(#pads) Pads: press pad (or corresponding key) to play a sample	
 	//$('#pads').tooltip();	//add tooltip
 	$('#pads').attr('title','Pads');	//add title
 	$('#pads').attr('data-content','Press pad (or corresponding key) to play a sample');	//add data-content
-	$('#pads').attr('data-toggle','popover');	//add data-toggle
-		$('#pads').popover(); //add popover
+	$('#pads').attr('data-trigger','hover');	//add trigger
+	$('#pads').popover(); //add popover
 		
 	//(#knobs) Knobs: click a knob to change your background
 	//$('#knobs').tooltip();	//add tooltip
 	$('#knobs').attr('title','Knobs');	//add title
+	$('#knobs').attr('data-trigger','hover');	//add trigger
 	$('#knobs').attr('data-content','Click a knob to change your background');	//add data-content
-	$('#knobs').attr('data-toggle','popover');	//add data-toggle
 	$('#knobs').popover(); //add popover
 });
 </script>
