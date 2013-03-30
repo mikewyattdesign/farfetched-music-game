@@ -57,6 +57,7 @@ $(document).ready(
 		WELCOME_FLAG = false;
 		current_song = 0;
 		initializeSong(current_song);
+		//initializeHelp();
 		createAudioList(songArray);
 		if(!WELCOME_FLAG){welcome();}
 		$('#current-song').text("Song: "+songArray[current_song]);
@@ -528,72 +529,50 @@ function debug_mode(){
 		DEBUG_FLAG = true;
 	}
 }
-/*
-var dogBarkingBuffer = null;
-var context = new webkitAudioContext();
-window.addEventListener('load', init, false);
-function init() {
-  try {
-    context = new webkitAudioContext();
-  }
-  catch(e) {
-    alert('Web Audio API is not supported in this browser');
-  }
+
+function initializeHelp(){
+	//(#rewind) Rewind: goes to previous track
+	$('#rewind').tooltip();	//add tooltip
+	$('#rewind').popover(); //add popover
+	$('#rewind').attr('title','Rewind');	//add title
+	$('#rewind').attr('data-content','Goes to Previous Track');	//add data-content
+	$('#rewind').attr('data-toggle','popover');	//add data-toggle
+	
+	//Pause: doesn't really do anything at the moment
+	
+	//(#play) Play: demonstrates the correct pattern
+	$('#play').tooltip();	//add tooltip
+	$('#play').popover(); //add popover
+	$('#play').attr('title','Play');	//add title
+	$('#play').attr('data-content','Plays Through Song');	//add data-content
+	$('#play').attr('data-toggle','popover');	//add data-toggle
+
+	//(#stop) Stop: stops the demonstration
+	$('#stop').tooltip();	//add tooltip
+	$('#stop').popover(); //add popover
+	$('#stop').attr('title','Stop');	//add title
+	$('#stop').attr('data-content','Stops Playback');	//add data-content
+	$('#stop').attr('data-toggle','popover');	//add data-toggle
+		
+	//(#forward) Forward: goes to the next track
+	$('#forward').tooltip();	//add tooltip
+	$('#forward').popover(); //add popover
+	$('#forward').attr('title','Forward');	//add title
+	$('#forward').attr('data-content','Goes to Next Track');	//add data-content
+	$('#forward').attr('data-toggle','popover');	//add data-toggle
+		
+	//(#pads) Pads: press pad (or corresponding key) to play a sample	
+	$('#pads').tooltip();	//add tooltip
+	$('#pads').popover(); //add popover
+	$('#pads').attr('title','Pads');	//add title
+	$('#pads').attr('data-content','Press pad (or corresponding key) to play a ample');	//add data-content
+	$('#pads').attr('data-toggle','popover');	//add data-toggle
+		
+	//(#knobs) Knobs: click a knob to change your background
+	$('#knobs').tooltip();	//add tooltip
+	$('#knobs').popover(); //add popover
+	$('#knobs').attr('title','Knobs');	//add title
+	$('#knobs').attr('data-content','Click a knob to change your background');	//add data-content
+	$('#knobs').attr('data-toggle','popover');	//add data-toggle
+		
 }
-
-function loadDogSound(url) {
-  var request = new XMLHttpRequest();
-  request.open('GET', url, true);
-  request.responseType = 'arraybuffer';
-
-  // Decode asynchronously
-  request.onload = function() {
-    context.decodeAudioData(request.response, function(dogBarkingBuffer) {
-      dogBarkingBuffer = buffer;
-    }, onError);
-  }
-  request.send();
-}
-function onError(){
-	alert('Smh. #bufferfail');	
-}
-
-function playSound() {
-  var source = context.createBufferSource(); // creates a sound source
-  source.buffer = dogBarkingBuffer;                    // tell the source which sound to play
-  source.connect(context.destination);       // connect the source to the context's destination (the speakers)
-  source.noteOn(0);                          // play the source now
-}
-
-loadDogSound('/u/15672882/Run1.ogg');
-//RhythmSample.play = playSound(dogBarkingBuffer);
-
-/*var RhythmSample={};
-RhythmSample.play=function(){
-	function playSound(buffer,time)
-	{
-		var source=context.createBufferSource();
-		source.buffer=buffer;
-		source.connect(context.destination);
-		source.noteOn(time);
-	}
-	var kick=BUFFERS.kick;
-	var snare=BUFFERS.snare;
-	var hihat=BUFFERS.hihat;
-	var startTime=context.currentTime+0.100;
-	var tempo=80;
-	var eighthNoteTime=(60/tempo)/2;
-	for(var bar=0;bar<2;bar++)
-	{
-		var time=startTime+bar*8*eighthNoteTime;
-		playSound(kick,time);
-		playSound(kick,time+4*eighthNoteTime);
-		playSound(snare,time+2*eighthNoteTime);
-		playSound(snare,time+6*eighthNoteTime);
-		for(var i=0;i<8;++i)
-		{
-			playSound(hihat,time+i*eighthNoteTime);
-		}
-	}
-};
-*/
