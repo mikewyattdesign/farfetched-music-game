@@ -83,13 +83,19 @@ $(document).ready(
 		$('#forward').click(function(){nextSong(current_song);});
 		$('#record').click(function(){debug_mode();});
 							
-		$('#knob-0').click(function(){$('.machine').css('background-image',"url(beatmachine_0.png)");})
-		$('#knob-1').click(function(){$('.machine').css('background-image',"url(beatmachine_1.png)");})
-		$('#knob-2').click(function(){$('.machine').css('background-image',"url(beatmachine_2.png)");})
-		$('#knob-3').click(function(){$('.machine').css('background-image',"url(beatmachine_3.png)");})
-		$('#knob-4').click(function(){$('.machine').css('background-image',"url(beatmachine_4.png)");})
-		$('#knob-5').click(function(){$('.machine').css('background-image',"url(beatmachine_5.png)");})
-		$('#knob-6').click(function(){$('.machine').css('background-image',"url(beatmachine_6.png)");})
+		$('#knob-0').click(function(){$('.machine').css('background-image',"url(beatmachine_0.png)");$('#nameplate').css('display','block');})
+		$('#knob-1').click(function(){$('.machine').css('background-image',"url(beatmachine_1.png)");$('#nameplate').css('display','block');})
+		$('#knob-2').click(function(){$('.machine').css('background-image',"url(beatmachine_2.png)");$('#nameplate').css('display','block');})
+		$('#knob-3').click(function(){$('.machine').css('background-image',"url(beatmachine_3.png)");$('#nameplate').css('display','block');})
+		$('#knob-4').click(function(){$('.machine').css('background-image',"url(beatmachine_4.png)");$('#nameplate').css('display','block');})
+		$('#knob-5').click(function(){$('.machine').css('background-image',"url(beatmachine_5.png)");$('#nameplate').css('display','block');})
+		$('#knob-6').click(function(){$('.machine').css('background-image',"url(beatmachine_6.png)");$('#nameplate').css('display','block');})
+		$('#knob-7').click(function(){$('.machine').css('background-image',"url(beatmachine_7.png)");$('#nameplate').css('display','none');})
+		$('#knob-8').click(function(){$('.machine').css('background-image',"url(beatmachine_8.png)");$('#nameplate').css('display','none');})
+		$('#knob-9').click(function(){$('.machine').css('background-image',"url(beatmachine_9.png)");$('#nameplate').css('display','none');})
+		$('#knob-10').click(function(){$('.machine').css('background-image',"url(beatmachine_10.png)");$('#nameplate').css('display','none');})
+		$('#knob-11').click(function(){$('.machine').css('background-image',"url(beatmachine_11.png)");$('#nameplate').css('display','none');})
+
 																				
 		$(document).keydown(function(key){
 			switch(key.which){
