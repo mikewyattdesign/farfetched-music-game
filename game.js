@@ -95,6 +95,7 @@ $(document).ready(
 		$('#knob-9').click(function(){$('.machine').css('background-image',"url(beatmachine_9.png)");$('#nameplate').css('display','none');})
 		$('#knob-10').click(function(){$('.machine').css('background-image',"url(beatmachine_10.png)");$('#nameplate').css('display','none');})
 		$('#knob-11').click(function(){$('.machine').css('background-image',"url(beatmachine_11.png)");$('#nameplate').css('display','none');})
+		$('#knob-12').click(function(){$('.machine').css('background-image',"url(beatmachine_12.png)");$('#nameplate').css('display','none');})
 
 																				
 		$(document).keydown(function(key){
