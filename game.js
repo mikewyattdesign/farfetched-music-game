@@ -89,6 +89,7 @@ $(document).ready(
 		$('#knob-3').click(function(){$('.machine').css('background-image',"url(beatmachine_3.png)");})
 		$('#knob-4').click(function(){$('.machine').css('background-image',"url(beatmachine_4.png)");})
 		$('#knob-5').click(function(){$('.machine').css('background-image',"url(beatmachine_5.png)");})
+		$('#knob-6').click(function(){$('.machine').css('background-image',"url(beatmachine_6.png)");})
 																				
 		$(document).keydown(function(key){
 			switch(key.which){
